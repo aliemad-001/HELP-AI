@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Safer global theme overrides using st.html (strictly for CSS targets, no text layouts)
+# Global style injection using st.html (Strictly CSS definitions only, no text layouts)
 custom_css = """
 <style>
     /* Main application background theme */
@@ -27,36 +27,6 @@ custom_css = """
         border-radius: 16px !important;
         padding: 20px !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    /* GenZ-style tag chips */
-    .chip {
-        background-color: #312E81;
-        color: #E0E7FF;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 14px;
-        display: inline-block;
-        margin-right: 8px;
-        margin-bottom: 8px;
-        border: 1px solid #4338CA;
-    }
-    
-    /* Interactive success timeline track */
-    .timeline-node {
-        border-left: 3px dashed #8B5CF6;
-        padding-left: 20px;
-        margin-left: 10px;
-        position: relative;
-        padding-bottom: 20px;
-    }
-    .timeline-node::before {
-        content: '●';
-        color: #22C55E;
-        position: absolute;
-        left: -8px;
-        top: 0;
-        font-size: 16px;
     }
     
     /* Metric styling configurations */
@@ -139,7 +109,7 @@ with col_title:
 st.markdown("---")
 
 # ==============================================================================
-# SURVEY MODE: USER INTERACTION STEP SYSTEM (Parser-Safe Containers)
+# SURVEY MODE: USER INTERACTION STEP SYSTEM (No HTML Variant)
 # ==============================================================================
 if not st.session_state.report_generated:
     st.markdown(f"### 🚀 Step {st.session_state.step} of 3")
@@ -256,7 +226,7 @@ if st.session_state.report_generated:
 
     # Global Live Notification Banner Strip (Parser-safe native component)
     target_goal = st.session_state.goal if st.session_state.goal else 'General Premium Track'
-    st.info(f"⚡ **Active Workspace:** {user_level} | 🎯 **North Star Goal:** {target_goal}")
+    st.info(f"⚡ Active Workspace: {user_level} | 🎯 North Star Goal: {target_goal}")
     
     # Modern App Tabs Structure
     tab_dashboard, tab_university, tab_roadmap = st.tabs(["📊 Career Insights Matrix", "🏛 University Systems Map", "🗺 Interactive Execution Timeline"])
@@ -270,8 +240,9 @@ if st.session_state.report_generated:
                 st.metric(label="Career Readiness Quotient Index", value=f"{readiness_score}/100")
                 
                 st.markdown("##### Operational Competency Profile Flags")
+                # Completely safe, text-only tag style layout using clear markdown
                 for strength in st.session_state.strengths:
-                    st.markdown(f'<span class="chip">✨ {strength}</span>', unsafe_with_html=True)
+                    st.write(f"✨ **{strength}**")
             
             with st.container(border=True):
                 st.markdown("### 🧠 Autonomous AI Mentor Recommendation Advice")
@@ -314,20 +285,14 @@ if st.session_state.report_generated:
     with tab_roadmap:
         with st.container(border=True):
             st.markdown("### 🗺 Linear Strategic Learning Roadmap Timeline Generation")
-            st.markdown("""
-            <div class="timeline-node">
-                <h5 style='margin:0; color:#8B5CF6;'>Phase 1: Present Foundation Build Phase (Next 90 Days)</h5>
-                <p style='margin:0; font-size:14px; color:#94A3B8;'>Master base core fundamentals directly connected with your choice preferences.</p>
-            </div>
-            <div class="timeline-node">
-                <h5 style='margin:0; color:#8B5CF6;'>Phase 2: Portfolio Aggregation Optimization (Months 3 - 6)</h5>
-                <p style='margin:0; font-size:14px; color:#94A3B8;'>Construct 2-3 production scale modular verified build projects.</p>
-            </div>
-            <div class="timeline-node">
-                <h5 style='margin:0; color:#8B5CF6;'>Phase 3: Network Authority Leverage Scaling (Months 6 - 12)</h5>
-                <p style='margin:0; font-size:14px; color:#94A3B8;'>Compete directly across massive technical hackathons and target external regional ecosystem opportunities.</p>
-            </div>
-            """, unsafe_with_html=True)
+            
+            # Using clean, cloud-native status wrappers
+            with st.status("📅 Phase 1: Present Foundation Build Phase (Next 90 Days)", state="complete"):
+                st.write("Master base core fundamentals directly connected with your choice preferences.")
+            with st.status("🚀 Phase 2: Portfolio Aggregation Optimization (Months 3 - 6)", state="complete"):
+                st.write("Construct 2-3 production scale modular verified build projects.")
+            with st.status("🏆 Phase 3: Network Authority Leverage Scaling (Months 6 - 12)", state="complete"):
+                st.write("Compete directly across massive technical hackathons and target external regional ecosystem opportunities.")
             
             st.markdown("#### 🛠 Focused Target Hard Skills Repositories To Build")
             for skill in data["skills"]:
