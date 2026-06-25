@@ -332,4 +332,3 @@ Keep learning consistently and stay curious.
     )
 
     st.balloons()
-```
