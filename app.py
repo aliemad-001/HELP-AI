@@ -254,13 +254,9 @@ if st.session_state.report_generated:
     readiness_score = min(40 + (len(st.session_state.strengths) * 8) + (len(st.session_state.activities) * 5), 100)
     user_level = "Explorer Level 1" if readiness_score < 60 else ("Builder Level 2" if readiness_score < 80 else "Specialist Level 3")
 
-    # Global Live Notification Banner Strip (Parser-safe alternative inline text styling)
-    st.markdown(f"""
-    <div style="background: linear-gradient(90deg, #6366F1, #8B5CF6); border-radius:12px; padding:16px; margin-bottom:25px; color:white;">
-        <h4 style="margin:0; color:white;">⚡ Active Session Hub Profile Workspace: {user_level}</h4>
-        <p style="margin:0; color:#E0E7FF; font-size:14px;">Target Goal Destination Flag: "{st.session_state.goal if st.session_state.goal else 'General Premium Track'}"</p>
-    </div>
-    """, unsafe_with_html=True)
+    # Global Live Notification Banner Strip (Parser-safe native component)
+    target_goal = st.session_state.goal if st.session_state.goal else 'General Premium Track'
+    st.info(f"⚡ **Active Workspace:** {user_level} | 🎯 **North Star Goal:** {target_goal}")
     
     # Modern App Tabs Structure
     tab_dashboard, tab_university, tab_roadmap = st.tabs(["📊 Career Insights Matrix", "🏛 University Systems Map", "🗺 Interactive Execution Timeline"])
