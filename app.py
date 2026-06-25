@@ -24,55 +24,55 @@ use_personality = st.checkbox(
 )
 personality = None
 if use_personality:
-personality = st.selectbox(
-"Select Personality Type",
-[
-"INTJ", "INTP", "ENTJ", "ENTP",
-"INFJ", "INFP", "ENFJ", "ENFP",
-"ISTJ", "ISFJ", "ESTJ", "ESFJ",
-"ISTP", "ISFP", "ESTP", "ESFP"
-]
-)
-if personality == "ENTP":
-startup_interest = st.slider(
-"Interest in Startups",
-1, 10, 5
-)
-ai_interest = st.slider(
+    personality = st.selectbox(
+    "Select Personality Type",
+    [
+    "INTJ", "INTP", "ENTJ", "ENTP",
+    "INFJ", "INFP", "ENFJ", "ENFP",
+    "ISTJ", "ISFJ", "ESTJ", "ESFJ",
+    "ISTP", "ISFP", "ESTP", "ESFP"
+    ]
+    )
+    if personality == "ENTP":
+    startup_interest = st.slider(
+    "Interest in Startups",
+    1, 10, 5
+    )
+    ai_interest = st.slider(
     "Interest in AI & Emerging Tech",
     1, 10, 5
-)
+    )
 
-debate_interest = st.slider(
+    debate_interest = st.slider(
     "Enjoy Debating Ideas",
     1, 10, 5
-)
+    )
 
-elif personality == "INTJ":
-planning_interest = st.slider(
-"Enjoy Long-Term Planning",
-1, 10, 5
-)
-strategy_interest = st.slider(
-    "Interest in Strategy",
+    elif personality == "INTJ":
+    planning_interest = st.slider(
+    "Enjoy Long-Term Planning",
     1, 10, 5
-)
-
-elif personality == "INFJ":
-helping_people = st.slider(
-"Enjoy Helping People",
-1, 10, 5
-)
-social_impact = st.slider(
-    "Importance of Social Impact",
+    )
+    strategy_interest = st.slider(
+        "Interest in Strategy",
+        1, 10, 5
+    )
+    
+    elif personality == "INFJ":
+    helping_people = st.slider(
+    "Enjoy Helping People",
     1, 10, 5
-)
-
-elif personality == "ESTP":
-risk_taking = st.slider(
-"Enjoy Taking Risks",
-1, 10, 5
-)
+    )
+    social_impact = st.slider(
+        "Importance of Social Impact",
+        1, 10, 5
+    )
+    
+    elif personality == "ESTP":
+    risk_taking = st.slider(
+    "Enjoy Taking Risks",
+    1, 10, 5
+    )
 fast_paced = st.slider(
     "Enjoy Fast-Paced Environments",
     1, 10, 5
