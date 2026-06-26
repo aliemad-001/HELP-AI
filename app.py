@@ -5,29 +5,43 @@ import time
 # COLOR SYSTEM & MODERN UI CONFIGURATION (Pure Native Engine)
 # ==============================================================================
 st.set_page_config(
-    page_title="PathPilot AI",
-    page_icon="🎓",
+    page_title="HELP AI",
+    page_icon="🧭",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
+# Custom button enhancements and card layout styles matching your specifications
 custom_css = """
 <style>
     .stApp {
-        background-color: #0F172A;
-        color: #F8FAFC;
+        background-color: #F4FBFF;
+        color: #1F2937;
+    }
+    div.stButton > button {
+        background-color: #5CB8E6 !important;
+        color: white !important;
+        border-radius: 15px !important;
+        border: none !important;
+        padding: 12px !important;
+        font-weight: bold !important;
+        transition: 0.3s !important;
+    }
+    div.stButton > button:hover {
+        background-color: #2F80ED !important;
+        transform: scale(1.03) !important;
     }
     [data-testid="stMetricBorderDiv"], .stElementContainer div[data-style="border"] {
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
+        background-color: #FFFFFF !important;
+        border: 1px solid #E6F7FF !important;
         border-radius: 16px !important;
         padding: 20px !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
     }
     [data-testid="stMetricValue"] {
         font-size: 32px;
         font-weight: 800;
-        color: #8B5CF6;
+        color: #5CB8E6;
     }
 </style>
 """
@@ -89,7 +103,7 @@ PERSONALITY_REGISTRY = {
             "Do you look for underlying logical fallacies during routine debates?",
             "Would you prefer discovering a new principle over building a commercial application?"
         ],
-        "universities": ["MIT", "Stanford", "ETH Zurich", "ETH Zurich"],
+        "universities": ["MIT", "Stanford", "ETH Zurich", "Carnegie Mellon"],
         "diversity_map": {
             "Technology": {
                 "bonus": {"AI Engineer": 10, "Data Scientist": 9, "Software Engineer": 7, "Cybersecurity Specialist": 6},
@@ -716,7 +730,7 @@ PERSONALITY_REGISTRY = {
             "Engineering": {
                 "bonus": {"Mechanical Engineer": 10, "Civil Engineer": 6, "Electrical Engineer": 6},
                 "roadmap": ["Phase 1: Design interactive electronic consumer device exterior shells", "Phase 2: Plan immersive theme park structural attraction concepts", "Phase 3: Present bold conceptual car design presentations layouts", "Phase 4: Direct industrial design product demonstration groups"],
-                "projects": ["Theme Park Structural Attraction Attraction Concept Rig", "Electronic Consumer Device Enclosure CAD Design"]
+                "projects": ["Theme Park Structural Attraction Concept Rig", "Electronic Consumer Device Enclosure CAD Design"]
             },
             "Creative Arts": {
                 "bonus": {"Content Creator": 10, "Graphic Designer": 9, "Animator": 8},
@@ -780,12 +794,41 @@ PATHWAYS = {
 }
 
 # ==============================================================================
-# LAYOUT STRUCTURING: APPLICATION HEADER
+# REBRANDED APPLICATION HEADER ELEMENTS (No Decorative Emojis)
 # ==============================================================================
 col_logo, col_title = st.columns([1, 11])
 with col_title:
-    st.title("🎓 PathPilot AI")
-    st.caption("⚡ Your Intelligent AI Career Success Mentor • Built for GenZ Builders")
+    st.title("HELP AI")
+    st.subheader("Higher Education Learning Path")
+
+st.markdown("""
+### Helping Students Discover Their Future with AI
+
+HELP AI analyzes your interests, strengths, personality, and goals to recommend:
+
+- Careers
+- Universities
+- Skills to Learn
+- Projects
+- Opportunities
+- Personalized Guidance
+
+Start your journey below.
+""")
+
+# ==============================================================================
+# EXPORT ARCHITECTURE CODE DOWNLOAD ACCESS PIN
+# ==============================================================================
+with open(__file__, "r", encoding="utf-8") as f:
+    code_content = f.read()
+
+st.download_button(
+    label="Download Complete app.py File",
+    data=code_content,
+    file_name="app.py",
+    mime="text/plain"
+)
+
 st.markdown("---")
 
 # ==============================================================================
@@ -798,19 +841,19 @@ if "report_generated" not in st.session_state:
 
 # ONBOARDING SURVEY WIZARD
 if not st.session_state.report_generated:
-    st.markdown(f"### 🚀 Step {st.session_state.step} of 4")
+    st.markdown(f"### Step {st.session_state.step} of 4")
     progress_percent = int((st.session_state.step / 4) * 100)
     st.progress(st.session_state.step / 4, text=f"Profile Setup Tracker: {progress_percent}%")
 
     # Step 1: Base Core Metrics
     if st.session_state.step == 1:
         with st.container(border=True):
-            st.markdown("#### 🧠 Academic Foundations")
+            st.markdown("#### Academic Foundations")
             grade = st.selectbox("Current Academic Tier", ["O-Level", "A-Level", "FSc", "Matric", "Other"], index=0)
             interest = st.selectbox("Main Interest Core Focus Area", list(PATHWAYS.keys()), index=0)
             goal = st.text_input("What is your North Star Dream Career or Goal? (e.g., Build an AI SaaS, Eradicate Disease)")
         
-        if st.button("Continue ➡️", use_container_width=True):
+        if st.button("Continue", use_container_width=True):
             if goal.strip() == "":
                 st.warning("Please outline your target North Star Dream Career or Goal to initialize routing.")
             else:
@@ -823,22 +866,22 @@ if not st.session_state.report_generated:
     # Step 2: Traits & Multi-Select Matrices
     elif st.session_state.step == 2:
         with st.container(border=True):
-            st.markdown("#### 🛠 Skills & Core Competencies Matrix")
+            st.markdown("#### Skills & Core Competencies Matrix")
             subjects = st.multiselect("Favorite Subjects", ["Computer Science", "Mathematics", "Physics", "Chemistry", "Biology", "Business", "Economics", "Art"], default=["Computer Science", "Mathematics"])
             strengths = st.multiselect("Superpowers (Your Top Strengths)", ["Problem Solving", "Creativity", "Leadership", "Communication", "Analytical Thinking", "Teamwork"], default=["Problem Solving"])
             weaknesses = st.multiselect("Growth Areas (Skills to Level Up)", ["Programming", "Public Speaking", "Mathematics", "Time Management", "Confidence", "Writing"], default=["Time Management"])
             activities = st.multiselect("High-Energy Activities You Vibe With", ["Coding", "Building Projects", "Research", "Reading", "Business", "Teaching", "Designing"], default=["Building Projects"])
             
-            leadership_raw = st.radio("Do You Vibe With Leading Teams?", ["😀 Love It", "🙂 Down for it sometimes", "😐 Prefer execution over coordination"])
+            leadership_raw = st.radio("Do You Vibe With Leading Teams?", ["Love It", "Down for it sometimes", "Prefer execution over coordination"])
             st.session_state.leadership = "Yes" if "Love" in leadership_raw else ("Sometimes" if "Down" in leadership_raw else "No")
         
         col_back, col_next = st.columns(2)
         with col_back:
-            if st.button("⬅️ Back", use_container_width=True):
+            if st.button("Back", use_container_width=True):
                 st.session_state.step = 1
                 st.rerun()
         with col_next:
-            if st.button("Continue ➡️", use_container_width=True):
+            if st.button("Continue", use_container_width=True):
                 st.session_state.subjects = subjects
                 st.session_state.strengths = strengths
                 st.session_state.weaknesses = weaknesses
@@ -846,10 +889,10 @@ if not st.session_state.report_generated:
                 st.session_state.step = 3
                 st.rerun()
 
-    # Step 3: EXTENSION MODULE - Personality Mode Route Selection
+    # Step 3: Personality Mode Route Selection
     elif st.session_state.step == 3:
         with st.container(border=True):
-            st.markdown("#### 🧩 Personality Intelligence Engine Activation")
+            st.markdown("#### Personality Intelligence Engine Activation")
             st.write("Unlock dynamic archetype behavioral profiling to refine your mentoring metrics.")
             
             p_route = st.radio("Choose onboarding method:", [
@@ -860,25 +903,22 @@ if not st.session_state.report_generated:
             
         col_back, col_next = st.columns(2)
         with col_back:
-            if st.button("⬅️ Back", use_container_width=True):
+            if st.button("Back", use_container_width=True):
                 st.session_state.step = 2
                 st.rerun()
         with col_next:
-            if st.button("Initialize Module ➡️", use_container_width=True):
+            if st.button("Initialize Module", use_container_width=True):
                 st.session_state.step = 4
                 st.rerun()
 
-    # Step 4: EXTENSION MODULE - Personality Intelligence Engine Evaluation Execution
+    # Step 4: Personality Engine Evaluation Execution
     elif st.session_state.step == 4:
-        # ----------------------------------------------------------------------
-        # OPTION A: DIRECT ARCHETYPE DISCOVERY WITH SPECIFIC CONTEXT DEEP-DIVE
-        # ----------------------------------------------------------------------
         if st.session_state.p_route == "A":
             with st.container(border=True):
                 st.markdown("#### Archetype Verification Tracking Pipeline")
                 selected_type = st.selectbox("Select explicit structural personality signature:", list(PERSONALITY_REGISTRY.keys()))
                 
-                st.markdown(f"##### 🎯 Context Verification Diagnostics for **{selected_type}** Profile")
+                st.markdown(f"##### Context Verification Diagnostics for {selected_type} Profile")
                 st.caption("Fine-tune your parameter scales below:")
                 
                 q_list = PERSONALITY_REGISTRY[selected_type]["questions"]
@@ -891,23 +931,20 @@ if not st.session_state.report_generated:
                 
             col_back, col_submit = st.columns(2)
             with col_back:
-                if st.button("⬅️ Change Route", use_container_width=True):
+                if st.button("Change Route", use_container_width=True):
                     st.session_state.step = 3
                     st.rerun()
             with col_submit:
-                if st.button("🔥 Compile Integrated Report", type="primary", use_container_width=True):
+                if st.button("🚀 Generate My AI Career Report", type="primary", use_container_width=True):
                     st.session_state.selected_personality = selected_type
                     st.session_state.p_confidence = 100
                     st.session_state.p_rationale = "Self-reported profile validated via contextual metric verification parameters tracking grids."
                     st.session_state.report_generated = True
                     st.rerun()
 
-        # ----------------------------------------------------------------------
-        # OPTION B: 12-QUESTION VECTOR PERSONALITY DIAGNOSTIC TEST (No MBTI naming)
-        # ----------------------------------------------------------------------
         else:
             with st.container(border=True):
-                st.markdown("#### 🧠 Cognitive Distribution Analysis Portal")
+                st.markdown("#### Cognitive Distribution Analysis Portal")
                 st.caption("Answer cleanly based on authentic operational defaults to map traits.")
                 
                 st.markdown("**Section 1: Energy Recharge Configurations**")
@@ -932,11 +969,11 @@ if not st.session_state.report_generated:
 
             col_back, col_submit = st.columns(2)
             with col_back:
-                if st.button("⬅️ Change Route", use_container_width=True):
+                if st.button("Change Route", use_container_width=True):
                     st.session_state.step = 3
                     st.rerun()
             with col_submit:
-                if st.button("🔥 Compile Cognitive Vector Profile", type="primary", use_container_width=True):
+                if st.button("🚀 Generate My AI Career Report", type="primary", use_container_width=True):
                     i_score = sum([1 for x in [ie1, ie2, ie3] if "alone" in x or "solo" in x or "Observe" in x])
                     n_score = sum([1 for x in [sn1, sn2, sn3] if "abstract" in x or "architecture" in x or "innovative" in x])
                     t_score = sum([1 for x in [tf1, tf2, tf3] if "logic" in x or "unvarnished" in x or "performance" in x])
@@ -960,7 +997,6 @@ if st.session_state.report_generated:
     p_code = st.session_state.selected_personality
     p_meta = PERSONALITY_REGISTRY[p_code]
     
-    # FETCH UNIQUE DIVERSIFIED SUBSYSTEM PROFILE RULES
     p_diverse = p_meta["diversity_map"][st.session_state.interest]
 
     # INTEGRATED SCORING ENGINE (Natively Modifying Weights)
@@ -975,7 +1011,6 @@ if st.session_state.report_generated:
     if st.session_state.leadership == "Yes":
         for c in integrated_scores: integrated_scores[c] += 6
 
-    # Inject the multi-tier personality area bonus allocation matrix rules safely
     p_bonus_map = p_diverse["bonus"]
     for c in integrated_scores:
         if c in p_bonus_map:
@@ -995,22 +1030,23 @@ if st.session_state.report_generated:
     readiness_score = min(40 + (len(st.session_state.strengths) * 8) + (len(st.session_state.activities) * 5), 100)
     workspace_tier = "Explorer Level 1" if readiness_score < 60 else ("Builder Level 2" if readiness_score < 80 else "Specialist Level 3")
 
-    st.info(f"⚡ Active Workspace Platform: {workspace_tier} | Archetype Signature Matrix Key: {p_code} - {p_meta['title']}")
+    st.success("Your HELP AI Personalized Report")
+    st.info(f"Active Workspace Platform: {workspace_tier} | Archetype Signature Matrix Key: {p_code} - {p_meta['title']}")
 
     # ==========================================================================
-    # VISUAL RENDER NODES: 3-TAB BENTO SYSTEM LAYOUT
+    # VISUAL RENDER NODES: 3-TAB BENTO SYSTEM LAYOUT (Clean Text Headings)
     # ==========================================================================
     tab_insights, tab_personality, tab_system_map = st.tabs([
-        "📊 Unified Career Matrix Insights", 
-        "🧩 Personality Intelligence Engine", 
-        "🏛 System Execution Roadmap Maps"
+        "Unified Career Matrix Insights", 
+        "Personality Intelligence Engine", 
+        "System Execution Roadmap Maps"
     ])
 
     with tab_insights:
         col_c1, col_c2 = st.columns([1, 1])
         with col_c1:
             with st.container(border=True):
-                st.markdown("🎯 #### Primary Vector Match Resolution")
+                st.markdown("#### Primary Vector Match Resolution")
                 st.metric(label="Calculated Profile Match Index", value=f"{top_score}% Confidence")
                 st.markdown(f"**Top Recommended Target Path:** `{top_career}`")
                 st.markdown(f"**North Star Mission Alignment Tag:** *\"{st.session_state.goal}\"*")
@@ -1018,107 +1054,107 @@ if st.session_state.report_generated:
             with st.container(border=True):
                 st.markdown("##### Target Technical Skills Baseline Repositories")
                 for skill in interest_data["skills"]:
-                    st.markdown(f"- `🛠 {skill}`")
+                    st.markdown(f"- ` {skill}`")
         
         with col_c2:
             with st.container(border=True):
-                st.markdown("🚀 #### Top Integrated Competitive Match Vectors")
+                st.markdown("#### Top Integrated Competitive Match Vectors")
                 st.caption("Baseline metrics altered dynamically by deep-dive personality weights maps")
                 for career, score in final_ranked_careers[:3]:
                     st.markdown(f"**{career}** • Evaluation Score: `{score}`")
                     st.progress(min(score, 100) / 100)
 
             with st.container(border=True):
-                st.markdown("🏆 #### Profile Milestone Credentials Status")
+                st.markdown("#### Profile Milestone Credentials Status")
                 col_m1, col_m2 = st.columns(2)
-                with col_m1: st.markdown("🏅 **AI Pioneer Match**\n\n`ACTIVE`")
-                with col_m2: st.markdown(f"🔥 **{p_meta['title']} Badge**\n\n`UNLOCKED`")
+                with col_m1: st.markdown("**AI Pioneer Match**\n\n`ACTIVE`")
+                with col_m2: st.markdown(f"**{p_meta['title']} Badge**\n\n`UNLOCKED`")
 
     with tab_personality:
         col_p1, col_p2 = st.columns([1, 1])
         with col_p1:
             with st.container(border=True):
-                st.markdown(f"### 🎯 Archetype Profile: {p_code} — {p_meta['title']}")
+                st.markdown(f"### Archetype Profile: {p_code} — {p_meta['title']}")
                 st.metric(label="Archetype Detection Alignment Confidence", value=f"{st.session_state.p_confidence}%")
                 st.write(f"**Diagnostic Pipeline Log:** *{st.session_state.p_rationale}*")
             
             with st.container(border=True):
-                st.markdown("#### 🧠 Cognitive Superpowers Mapping Tracker")
+                st.markdown("#### Cognitive Superpowers Mapping Tracker")
                 for strength in p_meta["strengths"]:
-                    st.markdown(f"✅ `✓ {strength}`")
+                    st.markdown(f"` {strength}`")
                     
             with st.container(border=True):
-                st.markdown("#### ⚠️ Growth Vectors & Mitigation Flags")
+                st.markdown("#### Growth Vectors & Mitigation Flags")
                 for growth in p_meta["growth"]:
-                    st.markdown(f"🚨 `• {growth}`")
+                    st.markdown(f"`• {growth}`")
 
         with col_p2:
             with st.container(border=True):
-                st.markdown(f"#### 💡 Archetype Bonus Metrics Mapped to **{st.session_state.interest}**")
+                st.markdown(f"#### Archetype Bonus Metrics Mapped to {st.session_state.interest}")
                 st.caption("Points explicitly appended directly into this core interest vertical focus area:")
                 for b_career, b_val in p_bonus_map.items():
-                    st.markdown(f"📈 *{b_career}:* **+{b_val} Weight Target Modifier**")
+                    st.markdown(f"*{b_career}:* **+{b_val} Weight Target Modifier**")
 
             with st.container(border=True):
-                st.markdown("🎨 #### Targeted Portfolio Project Directives")
-                st.caption(f"Bespoke validation prompts explicitly customized for a **{p_code}** tracking **{st.session_state.interest}** paths:")
+                st.markdown("#### Targeted Portfolio Project Directives")
+                st.caption(f"Bespoke validation prompts explicitly customized for a {p_code} tracking {st.session_state.interest} paths:")
                 for project in p_diverse["projects"]:
-                    st.markdown(f"🚀 **{project}**")
+                    st.markdown(f"**{project}**")
 
     with tab_system_map:
         col_r1, col_r2 = st.columns([1, 1])
         with col_r1:
             with st.container(border=True):
-                st.markdown(f"### 🗺 Custom Timeline Roadmap Architecture for **{p_code}** inside **{st.session_state.interest}**")
+                st.markdown(f"### Custom Timeline Roadmap Architecture for {p_code} inside {st.session_state.interest}")
                 for step in p_diverse["roadmap"]:
                     with st.status(step, state="complete"):
                         st.write("Milestone metrics verified and updated natively.")
 
         with col_r2:
             with st.container(border=True):
-                st.markdown("### 🏛 Adaptive Institutional Systems Alignment Placement")
+                st.markdown("### Adaptive Institutional Systems Alignment Placement")
                 st.markdown("**Tier 1 Placement Matrix (Dream Focus Systems)**")
-                for uni in modified_dream: st.markdown(f"⭐ `{uni}`")
+                for uni in modified_dream: st.markdown(f"`{uni}`")
                 
                 st.markdown("**Tier 2 Competitive Options (High Match Foundations)**")
-                for uni in modified_strong: st.markdown(f"🎯 `{uni}`")
+                for uni in modified_strong: st.markdown(f"`{uni}`")
                 
                 st.markdown("**Tier 3 Operational Value Matrices**")
-                for uni in interest_data["affordable"]: st.markdown(f"💡 `{uni}`")
+                for uni in interest_data["affordable"]: st.markdown(f"`{uni}`")
 
             with st.container(border=True):
-                st.markdown("🌐 #### Curated Open Learning Resource Vectors")
+                st.markdown("#### Curated Open Learning Resource Vectors")
                 for res in interest_data["resources"]:
-                    st.markdown(f"🔗 *[{res} Portal Connection Link](https://www.google.com/search?q={res.replace(' ', '+')}+course)*")
+                    st.markdown(f"*[{res} Portal Connection Link](https://www.google.com/search?q={res.replace(' ', '+')}+course)*")
 
     # ==========================================================================
-    # 4. ADVANCED MENTOR COGNITIVE INFERENCE GENERATION ENGINE
+    # MENTOR INSIGHTS BLOCK
     # ==========================================================================
     st.markdown("---")
     with st.container(border=True):
-        st.markdown("### 🧠 Master AI Success Mentor Counsel & Operational Directives")
+        st.markdown("### Advice from your AI Mentor")
         
         weaknesses_joined = ", ".join(st.session_state.weaknesses) if st.session_state.weaknesses else "None identified"
         subjects_joined = ", ".join(st.session_state.subjects) if st.session_state.subjects else "General Syllabus Core"
         strengths_joined = ", ".join(st.session_state.strengths) if st.session_state.strengths else "General Adaptability"
         
         paragraph_1 = f"""
-        Greetings, Pilot. Looking closely at your validated academic configuration track framework tracking across `{st.session_state.grade}`, 
-        your primary interest profile orientation toward **{st.session_state.interest}** matches seamlessly with your mapped 
-        behavioral footprint signature token **{p_code} ({p_meta['title']})**. The core diagnostic execution engine indicates that your clear baseline strength markers 
+        Greetings. Looking closely at your validated academic configuration track framework tracking across `{st.session_state.grade}`, 
+        your primary interest profile orientation toward {st.session_state.interest} matches seamlessly with your mapped 
+        behavioral footprint signature token {p_code} ({p_meta['title']}). The core diagnostic execution engine indicates that your clear baseline strength markers 
         in `{strengths_joined}` provide an excellent infrastructure advantage to drive execution loops toward your explicit goal milestone destination: *\"{st.session_state.goal}\"*. 
         However, to prevent standard optimization execution failures, your identified growth tracking gaps in `{weaknesses_joined}` must be addressed through targeted technical resource allocations.
         """
         
         paragraph_2 = f"""
-        To achieve high proficiency conversion status, execute your customized **{p_code}** timeline deployment pipeline meticulously. Your personality's focus 
-        profile suggests that your top strategic target path matching **{top_career}** with an integrated match index metric of `{top_score}` is highly accurate. 
+        To achieve high proficiency conversion status, execute your customized {p_code} timeline deployment pipeline meticulously. Your personality's focus 
+        profile suggests that your top strategic target path matching {top_career} with an integrated match index metric of `{top_score}` is highly accurate. 
         Focus your upcoming developmental sprints on executing high-value portfolio frameworks such as *\"{p_diverse['projects'][0]}\"*. This method ensures you establish distinct 
-        portfolio verification weight configurations when applying for admission allocations across top-tier institutional networks like **{", ".join(modified_dream[:2])}**.
+        portfolio verification weight configurations when applying for admission allocations across top-tier institutional networks like {", ".join(modified_dream[:2])}.
         """
         
         paragraph_3 = f"""
-        **AI Operational Directive Notes:** Leverage your inherent cognitive traits while reinforcing your core academic foundation pillars in `{subjects_joined}`. 
+        AI Operational Directive Notes: Leverage your inherent cognitive traits while reinforcing your core academic foundation pillars in `{subjects_joined}`. 
         Do not let structural constraints or operational tasks stall your forward velocity. Initialize Phase 1 of your personalized roadmap strategy track today, 
         maintain strict discipline throughout validation cycles, and focus your efforts on the highest-priority targets. You have the structural blueprints; now, go build.
         """
@@ -1129,7 +1165,30 @@ if st.session_state.report_generated:
 
     # GLOBAL STATE CLEAR RESET RE-ENTRY POINT TOOL PIPELINE
     st.markdown("---")
-    if st.button("🔄 Clear Profile Cache Engine & Initialize State Reset", use_container_width=True):
+    if st.button("Clear Profile Cache Engine & Initialize State Reset", use_container_width=True):
         for key in list(st.session_state.keys()):
             del st.session_state[key]
         st.rerun()
+
+# ==============================================================================
+# REBRANDED APPLICATION STATIC FOOTER SYSTEM
+# ==============================================================================
+st.markdown("---")
+
+st.markdown(
+"""
+<center>
+
+### HELP AI
+
+Higher Education Learning Path
+
+Helping students discover careers,
+universities and opportunities with AI.
+
+Built using Python & Streamlit
+
+</center>
+""",
+unsafe_allow_html=True
+)
