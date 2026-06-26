@@ -15,7 +15,7 @@ st.set_page_config(
 custom_css = """
 <style>
     .stApp {
-        background-color: #F4FBFF;
+        background-color: #0F172A;
         color: #1F2937;
     }
     div.stButton > button {
