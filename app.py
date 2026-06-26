@@ -796,10 +796,18 @@ PATHWAYS = {
 # ==============================================================================
 # REBRANDED APPLICATION HEADER ELEMENTS (No Decorative Emojis)
 # ==============================================================================
-col_logo, col_title = st.columns([1, 11])
-with col_title:
-    st.title("HELP AI")
-    st.subheader("Higher Education Learning Path")
+# ==============================================================================
+# REBRANDED APPLICATION HEADER ELEMENTS (Centered Top Heading Only)
+# ==============================================================================
+st.markdown(
+    """
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h1 style="margin-bottom: 0px; padding-bottom: 0px; color: #1E293B;">HELP AI</h1>
+        <h3 style="margin-top: 5px; font-weight: 500; color: #475569;">Higher Education Learning Path</h3>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown("""
 ### Helping Students Discover Their Future with AI
@@ -815,7 +823,6 @@ HELP AI analyzes your interests, strengths, personality, and goals to recommend:
 
 Start your journey below.
 """)
-
 # ==============================================================================
 # EXPORT ARCHITECTURE CODE DOWNLOAD ACCESS PIN
 # ==============================================================================
